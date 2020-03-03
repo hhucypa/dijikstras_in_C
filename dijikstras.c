@@ -14,11 +14,11 @@
 enum v_status {tree, fringe, unseen};
 
 struct vertex {
-  //adjacency list with edge weights at corresponding index
   enum v_status status;
   int parent;
   double distance;
 };
+
 int notEmpty(struct vertex* pQueue, int size) {
   for (int i = 0; i < size; ++i) {
     if (pQueue[i].status == fringe) return 1;
@@ -112,6 +112,7 @@ int main() {
     int current = getMin(pQueue, num_vertex);
     printf("min is: %d\n", current);
     pQueue[current].status = tree;
+   //The body of the following for loop should be moved out to a function of its own
     for (int i = 0; i < num_vertex; ++i) {
       if(graph[current][i] < INFINITY 
         && pQueue[i].status != tree) {
